@@ -79,6 +79,35 @@ function handleSubmit() {
 }
 
 
+function handleClear() {
+    
+    // Prevent the page from refreshing
+    d3.event.preventDefault();
+
+    d3.selectAll(".ufotds").remove();
+
+    displayAll();
+
+    var filterForm = d3.select("#datetime").node();
+    filterForm.value = "";
+
+    var filterForm = d3.select("#city").node();
+    filterForm.value = "";
+
+    var filterForm = d3.select("#state").node();
+    filterForm.value = "";
+
+    var filterForm = d3.select("#country").node();
+    filterForm.value = "";
+
+    var filterForm = d3.select("#shape").node();
+    filterForm.value = "";
+
+
+
+}
+
+
 function titleCase(str) {
     str = str.toLowerCase().split(' ');
     for (var i = 0; i < str.length; i++) {
@@ -86,21 +115,30 @@ function titleCase(str) {
     }
     return str.join(' ');
 }
+// default display all
+displayAll();
 
+// filter button clicked handle the event
 d3.select("#filter-btn").on("click",handleSubmit);
 
-
-var tbody = d3.select("tbody");
-
-tableData.forEach(function(element) {
-    var tr = tbody.append("tr");
-    tr.append("td").attr("class","ufotds").text(element.datetime);
-    tr.append("td").attr("class","ufotds").text(titleCase(element.city));
-    tr.append("td").attr("class","ufotds").text(element.state);
-    tr.append("td").attr("class","ufotds").text(element.country);
-    tr.append("td").attr("class","ufotds").text(element.shape);
-    tr.append("td").attr("class","ufotds").text(element.durationMinutes);
-    tr.append("td").attr("class","ufotds").text(element.comments);
+// clear button clicked handle the event
+d3.select("#clear-btn").on("click",handleClear);
 
 
-}, this);
+function displayAll() {
+    var tbody = d3.select("tbody");
+
+    tableData.forEach(function(element) {
+        var tr = tbody.append("tr");
+        tr.append("td").attr("class","ufotds").text(element.datetime);
+        tr.append("td").attr("class","ufotds").text(titleCase(element.city));
+        tr.append("td").attr("class","ufotds").text(element.state);
+        tr.append("td").attr("class","ufotds").text(element.country);
+        tr.append("td").attr("class","ufotds").text(element.shape);
+        tr.append("td").attr("class","ufotds").text(element.durationMinutes);
+        tr.append("td").attr("class","ufotds").text(element.comments);
+
+
+    }, this);
+
+}    
