@@ -18,7 +18,14 @@ function handleSubmit() {
 
     console.log(dateValue);
     console.log(tableData);
-    match = tableData.filter(tableData => tableData.datetime === dateValue );
+
+    match = tableData;
+
+    if(dateValue.length > 0) {
+        match = tableData.filter(tableData => tableData.datetime === dateValue );
+    }
+
+    
 
     var filterForm = d3.select("#city").node();
     var cityValue = filterForm.value;
