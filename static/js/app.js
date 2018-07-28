@@ -44,7 +44,7 @@ function handleSubmit() {
     var filterForm = d3.select("#country").node();
     var countryValue = filterForm.value;
 
-    if(stateValue.length > 0) {
+    if(countryValue.length > 0) {
         match = match.filter(match => match.country === countryValue);
     }
     
@@ -88,3 +88,19 @@ function titleCase(str) {
 }
 
 d3.select("#filter-btn").on("click",handleSubmit);
+
+
+var tbody = d3.select("tbody");
+
+tableData.forEach(function(element) {
+    var tr = tbody.append("tr");
+    tr.append("td").attr("class","ufotds").text(element.datetime);
+    tr.append("td").attr("class","ufotds").text(titleCase(element.city));
+    tr.append("td").attr("class","ufotds").text(element.state);
+    tr.append("td").attr("class","ufotds").text(element.country);
+    tr.append("td").attr("class","ufotds").text(element.shape);
+    tr.append("td").attr("class","ufotds").text(element.durationMinutes);
+    tr.append("td").attr("class","ufotds").text(element.comments);
+
+
+}, this);
